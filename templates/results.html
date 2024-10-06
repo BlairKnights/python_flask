@@ -1,8 +1,15 @@
 <html>
-    <body>
-        <h3>
-            Result
-        </h3>
-        Output : {{ result }}
-    </body>
+<body>
+<h3>
+Result
+</h3>
+<table border=1>
+{% for key,value in result.items() %}
+<tr>
+    <td>{{ key }}</td>
+    <td>{{ value }}</td> 
+</tr>
+{% endfor %}
+</table>
+</body>
 </html>

@@ -1,5 +1,17 @@
 from flask import Flask,redirect,url_for,render_template,request
 
+# Jinja2 Template Engine 
+'''
+Examples
+
+{% for %}..{% endfor %}  
+{% if %}..{% endif %}
+ 
+{%...%} - for loop and condition statements
+{{  }} - expressions to print output
+{#...#} - this is for comments
+'''
+
 #this will create a WSGI application
 app=Flask(__name__)
 
@@ -7,35 +19,16 @@ app=Flask(__name__)
 def welcome():
     return render_template('index.html')
 
-@app.route('/info')
-def info():
-    return "Second page."
-
-'''
-@app.route('/failed/<int:marks>')
-def failed(marks):
-    return "Failed:"+str(marks)
-'''
-'''
-@app.route('/passed/<int:marks>')
-def passed(marks):
-    res=''
-    if marks<50:
-        res='failed'
-    else:
-        res='passed'
-    return render_template('results.html',result=res)
-'''
-
 #redirecting function
 @app.route('/results/<int:marks>')
 def results(marks):
-    res=""
+    status=''
     if marks<50:
-        res="failed" 
+        status='failed'
     else:
-        res="passed"
-    return render_template('results.html',result=res)
+        status='passed'
+    result={'marks':marks,'status':status}
+    return render_template('results.html',result=result)
 
 #result checker
 @app.route('/submit',methods=['POST','GET'])
